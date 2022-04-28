@@ -19,7 +19,8 @@
       'up': {'top': -50, 'left': 0},
       'down': {'top': 50, 'left': 0},
       'left': {'top': 0, 'left': -50},
-      'right': {'top': 0, 'left': 50}
+      'right': {'top': 0, 'left': 50},
+      undefined: {'top': 0, 'left': 0}
     }
     top += directions[direction]['top']
     left += directions[direction]['left']
@@ -72,7 +73,8 @@
       'up': 'down',
       'down': 'up',
       'left': 'right',
-      'right': 'left'
+      'right': 'left',
+      'none': 'asdf'
     }
     //console.log('a: ' + a)
     //console.log('opposite a: ' + opposites[a])
@@ -84,8 +86,8 @@
   }
 
   function onKeyDown(e) {
-    console.log(e.keyCode);
     const newDirection = getDirectionFromKeyCode(e.keyCode);
+    console.log(newDirection);
     if (!isOpposite(newDirection, direction)) {
       direction = newDirection;
     }
@@ -108,7 +110,15 @@
       39: 'right',
       40: 'down'
     }
-    return keyTransform[keyCode];
+    //console.log('keyCode pressed: ' + keyCode)
+    //console.log('current direction: ' + direction)
+    if ( 36 < keyCode && keyCode < 41) {
+      //console.log('new direction: ' + keyTransform[keyCode])
+      return keyTransform[keyCode];
+    } else {
+      //console.log('direction unchanged: ' + direction)
+      return direction;
+    }
   }
   resetGame();
     //background-image: url("../background.jpg");
