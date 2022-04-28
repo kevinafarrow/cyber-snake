@@ -712,7 +712,8 @@ var app = (function () {
     		"up": "down",
     		"down": "up",
     		"left": "right",
-    		"right": "left"
+    		"right": "left",
+    		"none": "asdf"
     	};
 
     	//console.log('a: ' + a)
@@ -722,17 +723,6 @@ var app = (function () {
     	if (opposites[a] == b) {
     		return true;
     	}
-    }
-
-    function getDirectionFromKeyCode(keyCode) {
-    	const keyTransform = {
-    		37: "left",
-    		38: "up",
-    		39: "right",
-    		40: "down"
-    	};
-
-    	return keyTransform[keyCode];
     }
 
     function instance$3($$self, $$props, $$invalidate) {
@@ -754,7 +744,8 @@ var app = (function () {
     				"up": { "top": -50, "left": 0 },
     				"down": { "top": 50, "left": 0 },
     				"left": { "top": 0, "left": -50 },
-    				"right": { "top": 0, "left": 50 }
+    				"right": { "top": 0, "left": 50 },
+    				undefined: { "top": 0, "left": 0 }
     			};
 
     			top += directions[direction]["top"];
@@ -801,8 +792,8 @@ var app = (function () {
     	}
 
     	function onKeyDown(e) {
-    		console.log(e.keyCode);
     		const newDirection = getDirectionFromKeyCode(e.keyCode);
+    		console.log(newDirection);
 
     		if (!isOpposite(newDirection, direction)) {
     			$$invalidate(2, direction = newDirection);
@@ -818,6 +809,25 @@ var app = (function () {
     			{ left: unit$1 * 1, top: 0 },
     			{ left: unit$1 * 0, top: 0 }
     		]);
+    	}
+
+    	function getDirectionFromKeyCode(keyCode) {
+    		const keyTransform = {
+    			37: "left",
+    			38: "up",
+    			39: "right",
+    			40: "down"
+    		};
+
+    		//console.log('keyCode pressed: ' + keyCode)
+    		//console.log('current direction: ' + direction)
+    		if (36 < keyCode && keyCode < 41) {
+    			//console.log('new direction: ' + keyTransform[keyCode])
+    			return keyTransform[keyCode];
+    		} else {
+    			//console.log('direction unchanged: ' + direction)
+    			return direction;
+    		}
     	}
 
     	resetGame();
