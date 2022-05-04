@@ -893,7 +893,7 @@ var app = (function () {
     	let food2Top = 0;
     	let direction = "right";
     	let snakeBodies = [];
-    	let board = { "width": 1250, "height": 450 };
+    	let board = { "width": 1250, "height": 550 };
 
     	//draw the game repeatedly
     	setInterval(
