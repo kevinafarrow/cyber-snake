@@ -1,14 +1,21 @@
 <script>
   import Snake from "./Snake.svelte";
   import Food from "./Food.svelte";
-  let foodLeft = 0;
-  let foodTop = 0;
+  import Questionbox from "./Questionbox.svelte";
+
+  let question = "Which is better?";
+  let option1 = "bears";
+  let option2 = "beets";
+
+  let food1Left = 0;
+  let food1Top = 0;
+  let food2Left = 0;
+  let food2Top = 0;
   let direction = 'right';
   let snakeBodies = [];
   let ms = 100;
-  let board = {'width': 1250, 'height': 750};
+  let board = {'width': 1250, 'height': 450};
   let unit = 50;
-
 
   //draw the game repeatedly
   setInterval(() => {
@@ -31,7 +38,8 @@
     snakeBodies = [ newHead, ...snakeBodies];
 
     // if the snake eats food, create a new food and add a piece to the snake
-    if (isCollide(newHead, { left: foodLeft, top: foodTop})) {
+    if ((isCollide(newHead, { left: food1Left, top: food1Top })) || (isCollide(newHead, { left: food2Left, top: food2Top }))) {
+      //poseQuestion();
       moveFood();
       snakeBodies = [...snakeBodies, snakeBodies[snakeBodies.length - 1]];
     }
@@ -41,6 +49,10 @@
       resetGame();
     }
   }, ms)
+
+  function poseQuestion() {
+    
+  }
 
   function isCollide(a, b) {
     return !(
@@ -52,8 +64,10 @@
   }
 
   function moveFood() {
-    foodTop = Math.floor(Math.random() * Math.floor(board.height / unit)) * unit;
-    foodLeft = Math.floor(Math.random() * Math.floor(board.width / unit)) * unit;
+    food1Top = Math.floor(Math.random() * Math.floor(board.height / unit)) * unit;
+    food1Left = Math.floor(Math.random() * Math.floor(board.width / unit)) * unit;
+    food2Top = Math.floor(Math.random() * Math.floor(board.height / unit)) * unit;
+    food2Left = Math.floor(Math.random() * Math.floor(board.width / unit)) * unit;
   }
 
   function isGameOver() {
@@ -128,23 +142,27 @@
 <style>
   main {
     width: 1250px;
-    height: 750px;
+    height: 550px;
     border: solid black 1px;
     position: relative;
     margin: 20px auto;
     background-size: contain;
     background-color: #333333;
   }
-  h2,
-  h1 {
+  h2, h1 {
     text-align: center;
     font-family: 'Roboto Mono', monospace;
   }
 </style>
 
 <h1>Cyber Snake</h1>
+<Questionbox {question} {option1} {option2}/>
 <main>
   <Snake {snakeBodies} {direction}/>
-  <Food {foodLeft} {foodTop} />
+  <Food {food1Left} {food1Top} {food2Left} {food2Top} />
 </main>
+<h2>Score: {snakeBodies.length - 3}</h2>
+<button>
+  Pause
+</button>
 <svelte:window on:keydown={onKeyDown} />
