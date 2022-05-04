@@ -761,8 +761,6 @@ var app = (function () {
     	let t5;
     	let t6_value = /*snakeBodies*/ ctx[5].length - 3 + "";
     	let t6;
-    	let t7;
-    	let button;
     	let current;
     	let dispose;
     	const questionbox = new Questionbox({ props: { question, option1, option2 } });
@@ -798,9 +796,6 @@ var app = (function () {
     			h2 = element("h2");
     			t5 = text("Score: ");
     			t6 = text(t6_value);
-    			t7 = space();
-    			button = element("button");
-    			button.textContent = "Pause";
     			attr(h1, "class", "svelte-y3tbei");
     			attr(main, "class", "svelte-y3tbei");
     			attr(h2, "class", "svelte-y3tbei");
@@ -818,8 +813,6 @@ var app = (function () {
     			insert(target, h2, anchor);
     			append(h2, t5);
     			append(h2, t6);
-    			insert(target, t7, anchor);
-    			insert(target, button, anchor);
     			current = true;
     			if (remount) dispose();
     			dispose = listen(window, "keydown", /*onKeyDown*/ ctx[6]);
@@ -860,8 +853,6 @@ var app = (function () {
     			destroy_component(food);
     			if (detaching) detach(t4);
     			if (detaching) detach(h2);
-    			if (detaching) detach(t7);
-    			if (detaching) detach(button);
     			dispose();
     		}
     	};
