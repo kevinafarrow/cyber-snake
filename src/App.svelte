@@ -162,7 +162,4 @@
   <Food {food1Left} {food1Top} {food2Left} {food2Top} />
 </main>
 <h2>Score: {snakeBodies.length - 3}</h2>
-<button>
-  Pause
-</button>
 <svelte:window on:keydown={onKeyDown} />
