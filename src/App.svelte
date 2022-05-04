@@ -14,7 +14,7 @@
   let direction = 'right';
   let snakeBodies = [];
   let ms = 100;
-  let board = {'width': 1250, 'height': 450};
+  let board = {'width': 1250, 'height': 550};
   let unit = 50;
 
   //draw the game repeatedly
