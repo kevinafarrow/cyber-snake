@@ -4,6 +4,7 @@
   import Questionbox from "./Questionbox.svelte";
 
   let question = "Which is better?";
+  //let option1 = "here is a really long question. it goes on and on and really makes you consider.";
   let option1 = "bears";
   let option2 = "beets";
 
@@ -13,12 +14,28 @@
   let food2Top = 0;
   let direction = 'right';
   let snakeBodies = [];
-  let ms = 100;
+  let speed = 100;
   let board = {'width': 1250, 'height': 550};
   let unit = 50;
 
+  let clear
+  //i got this from svelte REPL and don't know exactly how it works.
+  $: {
+	  clearInterval(clear)
+	  clear = setInterval(runGame, speed)
+  }
+
+  function togglePause() {
+    const pauseSpeed = 100000000;
+    if (speed < pauseSpeed) {
+      speed = pauseSpeed;
+    } else if (speed == pauseSpeed) {
+      speed = 100;
+    }
+  }
+
   //draw the game repeatedly
-  setInterval(() => {
+  function runGame() {
     //console.log('speed: ' + ms);
     snakeBodies.pop();
     let { left, top } = snakeBodies[0];
@@ -48,7 +65,7 @@
       alert("Game Over!");
       resetGame();
     }
-  }, ms)
+  }
 
   function poseQuestion() {
     
@@ -100,8 +117,12 @@
   }
 
   function onKeyDown(e) {
+    //console.log('keyCode: ' + e.keyCode)
+    if (e.keyCode == 32) {
+      togglePause();
+    }
     const newDirection = getDirectionFromKeyCode(e.keyCode);
-    console.log(newDirection);
+    //console.log(newDirection);
     if (!isOpposite(newDirection, direction)) {
       direction = newDirection;
     }

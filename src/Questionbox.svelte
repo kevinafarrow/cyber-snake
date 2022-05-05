@@ -38,33 +38,30 @@
     z-index: 0;
     margin: .2em
   }
-  .food1{
+  .food1 {
     background-color: #0055FF;
     border-radius: 50%;
   }
-  .food2{
+  .food2 {
     background-color: #FF5500;
     border-radius: 5%;
   }
-	.grid-container {
+	.legend {
     display: grid;
     grid-template-columns: 1.5em 1fr;
-    grid-gap: .5em;
-    margin: auto;
+    grid-template-rows: repeat(2, 50%);
+    grid-gap: 1.5em;
+    margin: 1.5em;
     position: relative center;
   }
 </style>
 
 <div class="questionbox">
 	<div class="question">{question}</div>
-  <div class="grid-container">
-    <div class="food">
-      <div class="food1"/>
-      <div class="food2"/>
-    </div>
-    <div class="option">
-	    <div class="option1">{option1}</div>
-	    <div class="option2">{option2}</div>
-    </div>
+  <div class="legend">
+    <div class="food1"/>
+	  <div class="option1">{option1}</div>
+    <div class="food2"/>
+	  <div class="option2">{option2}</div>
   </div>
 </div>
