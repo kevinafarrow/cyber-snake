@@ -758,25 +758,32 @@ var app = (function () {
     	let t4;
     	let h2;
     	let t5;
-    	let t6_value = /*snakeBodies*/ ctx[5].length - 3 + "";
+    	let t6_value = /*snakeBodies*/ ctx[8].length - 3 + "";
     	let t6;
     	let current;
     	let dispose;
-    	const questionbox = new Questionbox({ props: { question, option1, option2 } });
+
+    	const questionbox = new Questionbox({
+    			props: {
+    				question: /*question*/ ctx[0],
+    				option1: /*option1*/ ctx[1],
+    				option2: /*option2*/ ctx[2]
+    			}
+    		});
 
     	const snake = new Snake({
     			props: {
-    				snakeBodies: /*snakeBodies*/ ctx[5],
-    				direction: /*direction*/ ctx[4]
+    				snakeBodies: /*snakeBodies*/ ctx[8],
+    				direction: /*direction*/ ctx[7]
     			}
     		});
 
     	const food = new Food({
     			props: {
-    				food1Left: /*food1Left*/ ctx[0],
-    				food1Top: /*food1Top*/ ctx[1],
-    				food2Left: /*food2Left*/ ctx[2],
-    				food2Top: /*food2Top*/ ctx[3]
+    				food1Left: /*food1Left*/ ctx[3],
+    				food1Top: /*food1Top*/ ctx[4],
+    				food2Left: /*food2Left*/ ctx[5],
+    				food2Top: /*food2Top*/ ctx[6]
     			}
     		});
 
@@ -814,20 +821,25 @@ var app = (function () {
     			append(h2, t6);
     			current = true;
     			if (remount) dispose();
-    			dispose = listen(window, "keydown", /*onKeyDown*/ ctx[6]);
+    			dispose = listen(window, "keydown", /*onKeyDown*/ ctx[9]);
     		},
     		p(ctx, [dirty]) {
+    			const questionbox_changes = {};
+    			if (dirty & /*question*/ 1) questionbox_changes.question = /*question*/ ctx[0];
+    			if (dirty & /*option1*/ 2) questionbox_changes.option1 = /*option1*/ ctx[1];
+    			if (dirty & /*option2*/ 4) questionbox_changes.option2 = /*option2*/ ctx[2];
+    			questionbox.$set(questionbox_changes);
     			const snake_changes = {};
-    			if (dirty & /*snakeBodies*/ 32) snake_changes.snakeBodies = /*snakeBodies*/ ctx[5];
-    			if (dirty & /*direction*/ 16) snake_changes.direction = /*direction*/ ctx[4];
+    			if (dirty & /*snakeBodies*/ 256) snake_changes.snakeBodies = /*snakeBodies*/ ctx[8];
+    			if (dirty & /*direction*/ 128) snake_changes.direction = /*direction*/ ctx[7];
     			snake.$set(snake_changes);
     			const food_changes = {};
-    			if (dirty & /*food1Left*/ 1) food_changes.food1Left = /*food1Left*/ ctx[0];
-    			if (dirty & /*food1Top*/ 2) food_changes.food1Top = /*food1Top*/ ctx[1];
-    			if (dirty & /*food2Left*/ 4) food_changes.food2Left = /*food2Left*/ ctx[2];
-    			if (dirty & /*food2Top*/ 8) food_changes.food2Top = /*food2Top*/ ctx[3];
+    			if (dirty & /*food1Left*/ 8) food_changes.food1Left = /*food1Left*/ ctx[3];
+    			if (dirty & /*food1Top*/ 16) food_changes.food1Top = /*food1Top*/ ctx[4];
+    			if (dirty & /*food2Left*/ 32) food_changes.food2Left = /*food2Left*/ ctx[5];
+    			if (dirty & /*food2Top*/ 64) food_changes.food2Top = /*food2Top*/ ctx[6];
     			food.$set(food_changes);
-    			if ((!current || dirty & /*snakeBodies*/ 32) && t6_value !== (t6_value = /*snakeBodies*/ ctx[5].length - 3 + "")) set_data(t6, t6_value);
+    			if ((!current || dirty & /*snakeBodies*/ 256) && t6_value !== (t6_value = /*snakeBodies*/ ctx[8].length - 3 + "")) set_data(t6, t6_value);
     		},
     		i(local) {
     			if (current) return;
@@ -856,14 +868,31 @@ var app = (function () {
     		}
     	};
     }
-
-    let question = "Which is better?";
-
-    //let option1 = "here is a really long question. it goes on and on and really makes you consider.";
-    let option1 = "bears";
-
-    let option2 = "beets";
     let unit$1 = 50;
+
+    function makePassword(length) {
+    	var result = "";
+    	var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    	var charactersLength = characters.length;
+
+    	for (var i = 0; i < length; i++) {
+    		result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    	}
+
+    	return result;
+    }
+
+    function shuffle(array) {
+    	let currentIndex = array.length, randomIndex;
+
+    	while (currentIndex != 0) {
+    		randomIndex = Math.floor(Math.random() * currentIndex);
+    		currentIndex--;
+    		[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    	}
+
+    	return array;
+    }
 
     function isCollide(a, b) {
     	return !(a.top < b.top || a.top > b.top || a.left < b.left || a.left > b.left);
@@ -888,6 +917,17 @@ var app = (function () {
     }
 
     function instance$4($$self, $$props, $$invalidate) {
+    	let question = "Which is better?";
+
+    	//let option1 = "here is a really long question. it goes on and on and really makes you consider.";
+    	let option1 = "bears";
+
+    	let option2 = "beets";
+    	let correct = "bears";
+    	let incorrect = "beets";
+    	let foodEaten = "";
+    	let correctFood = "food1";
+    	let answerFoods = ["food1", "food2"];
     	let food1Left = 0;
     	let food1Top = 0;
     	let food2Left = 0;
@@ -896,17 +936,8 @@ var app = (function () {
     	let snakeBodies = [];
     	let speed = 100;
     	let board = { "width": 1250, "height": 550 };
+    	let gameOver = false;
     	let clear;
-
-    	function togglePause() {
-    		const pauseSpeed = 100000000;
-
-    		if (speed < pauseSpeed) {
-    			$$invalidate(7, speed = pauseSpeed);
-    		} else if (speed == pauseSpeed) {
-    			$$invalidate(7, speed = 100);
-    		}
-    	}
 
     	//draw the game repeatedly
     	function runGame() {
@@ -930,41 +961,78 @@ var app = (function () {
     		//console.log('left: ' + left)
     		const newHead = { left, top };
 
-    		$$invalidate(5, snakeBodies = [newHead, ...snakeBodies]);
+    		$$invalidate(8, snakeBodies = [newHead, ...snakeBodies]);
 
     		// if the snake eats food, create a new food and add a piece to the snake
-    		if (isCollide(newHead, { left: food1Left, top: food1Top }) || isCollide(newHead, { left: food2Left, top: food2Top })) {
-    			//poseQuestion();
-    			moveFood();
-
-    			$$invalidate(5, snakeBodies = [...snakeBodies, snakeBodies[snakeBodies.length - 1]]);
+    		if (isCollide(newHead, { left: food1Left, top: food1Top })) {
+    			foodEaten = "food1";
+    		} else if (isCollide(newHead, { left: food2Left, top: food2Top })) {
+    			foodEaten = "food2";
     		}
 
-    		if (isGameOver()) {
+    		if (isCollide(newHead, { left: food1Left, top: food1Top }) || isCollide(newHead, { left: food2Left, top: food2Top })) {
+    			console.log("food eaten: " + foodEaten);
+    			console.log("correctFood: " + correctFood);
+
+    			if (foodEaten === correctFood) {
+    				newQuestion();
+    				moveFood();
+    				$$invalidate(8, snakeBodies = [...snakeBodies, snakeBodies[snakeBodies.length - 1]]);
+    			} else {
+    				gameOver = true;
+    			}
+    		}
+
+    		isGameOver();
+
+    		if (gameOver) {
     			alert("Game Over!");
     			resetGame();
     		}
     	}
 
+    	function newQuestion() {
+    		$$invalidate(0, question = "Which password is better?");
+    		incorrect = makePassword(5);
+    		correct = makePassword(7);
+    		const answers = [incorrect, correct];
+    		shuffle(answers);
+    		$$invalidate(1, option1 = answers[0]);
+    		$$invalidate(2, option2 = answers[1]);
+    		correctFood = answerFoods[answers.indexOf(correct)];
+    	}
+
     	function moveFood() {
-    		$$invalidate(1, food1Top = Math.floor(Math.random() * Math.floor(board.height / unit$1)) * unit$1);
-    		$$invalidate(0, food1Left = Math.floor(Math.random() * Math.floor(board.width / unit$1)) * unit$1);
-    		$$invalidate(3, food2Top = Math.floor(Math.random() * Math.floor(board.height / unit$1)) * unit$1);
-    		$$invalidate(2, food2Left = Math.floor(Math.random() * Math.floor(board.width / unit$1)) * unit$1);
+    		$$invalidate(4, food1Top = Math.floor(Math.random() * Math.floor(board.height / unit$1)) * unit$1);
+    		$$invalidate(3, food1Left = Math.floor(Math.random() * Math.floor(board.width / unit$1)) * unit$1);
+    		$$invalidate(6, food2Top = Math.floor(Math.random() * Math.floor(board.height / unit$1)) * unit$1);
+    		$$invalidate(5, food2Left = Math.floor(Math.random() * Math.floor(board.width / unit$1)) * unit$1);
     	}
 
     	function isGameOver() {
+    		//console.log('calling is gameover: ' + gameOver)
     		const snakeBodiesNoHead = snakeBodies.slice(1);
+
     		const snakeCollisions = snakeBodiesNoHead.filter(sb => isCollide(sb, snakeBodies[0]));
 
     		if (snakeCollisions.length !== 0) {
-    			return true;
+    			gameOver = true;
     		}
 
     		const { top, left } = snakeBodies[0];
 
     		if (top >= board.height || top < 0 || left >= board.width || left < 0) {
-    			return true;
+    			gameOver = true;
+    		}
+    	}
+
+    	function togglePause() {
+    		const pauseSpeed = 100000000;
+
+    		if (speed < pauseSpeed) {
+    			$$invalidate(14, speed = pauseSpeed);
+    		} else if (speed == pauseSpeed) {
+    			$$invalidate(14, speed = 100);
     		}
     	}
 
@@ -978,15 +1046,17 @@ var app = (function () {
 
     		//console.log(newDirection);
     		if (!isOpposite(newDirection, direction)) {
-    			$$invalidate(4, direction = newDirection);
+    			$$invalidate(7, direction = newDirection);
     		}
     	}
 
     	function resetGame() {
+    		gameOver = false;
+    		newQuestion();
     		moveFood();
-    		$$invalidate(4, direction = "right");
+    		$$invalidate(7, direction = "right");
 
-    		$$invalidate(5, snakeBodies = [
+    		$$invalidate(8, snakeBodies = [
     			{ left: unit$1 * 2, top: 0 },
     			{ left: unit$1 * 1, top: 0 },
     			{ left: unit$1 * 0, top: 0 }
@@ -1015,16 +1085,27 @@ var app = (function () {
     	resetGame();
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*clear, speed*/ 384) {
-    			//i got this from svelte REPL and don't know exactly how it works.
+    		if ($$self.$$.dirty & /*clear, speed*/ 81920) {
+    			//i got this from svelte REPL and don't know exactly how it works, but it enables the pause button
     			 {
     				clearInterval(clear);
-    				$$invalidate(8, clear = setInterval(runGame, speed));
+    				$$invalidate(16, clear = setInterval(runGame, speed));
     			}
     		}
     	};
 
-    	return [food1Left, food1Top, food2Left, food2Top, direction, snakeBodies, onKeyDown];
+    	return [
+    		question,
+    		option1,
+    		option2,
+    		food1Left,
+    		food1Top,
+    		food2Left,
+    		food2Top,
+    		direction,
+    		snakeBodies,
+    		onKeyDown
+    	];
     }
 
     class App extends SvelteComponent {
