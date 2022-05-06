@@ -802,9 +802,9 @@ var app = (function () {
     			h2 = element("h2");
     			t5 = text("Score: ");
     			t6 = text(t6_value);
-    			attr(h1, "class", "svelte-y3tbei");
-    			attr(main, "class", "svelte-y3tbei");
-    			attr(h2, "class", "svelte-y3tbei");
+    			attr(h1, "class", "svelte-15vqhs");
+    			attr(main, "class", "svelte-15vqhs");
+    			attr(h2, "class", "svelte-15vqhs");
     		},
     		m(target, anchor, remount) {
     			insert(target, h1, anchor);
@@ -868,6 +868,7 @@ var app = (function () {
     		}
     	};
     }
+    let pauseSpeed = 100000000;
     let unit$1 = 50;
 
     function makePassword(length) {
@@ -976,6 +977,8 @@ var app = (function () {
 
     			if (foodEaten === correctFood) {
     				newQuestion();
+    				setSpeed(3000);
+    				delayedUnpause(3000);
     				moveFood();
     				$$invalidate(8, snakeBodies = [...snakeBodies, snakeBodies[snakeBodies.length - 1]]);
     			} else {
@@ -990,6 +993,14 @@ var app = (function () {
     			resetGame();
     		}
     	}
+
+    	const delay = ms => new Promise(res => setTimeout(res, ms));
+
+    	const delayedUnpause = async delayTime => {
+    		await delay(delayTime);
+    		console.log("Waited " + delayTime);
+    		setSpeed(100);
+    	};
 
     	function newQuestion() {
     		$$invalidate(0, question = "Which password is better?");
@@ -1026,20 +1037,19 @@ var app = (function () {
     		}
     	}
 
-    	function togglePause() {
-    		const pauseSpeed = 100000000;
-
-    		if (speed < pauseSpeed) {
-    			$$invalidate(14, speed = pauseSpeed);
-    		} else if (speed == pauseSpeed) {
-    			$$invalidate(14, speed = 100);
-    		}
+    	function setSpeed(newSpeed) {
+    		console.log("changing speed to " + newSpeed);
+    		$$invalidate(14, speed = newSpeed);
     	}
 
     	function onKeyDown(e) {
     		//console.log('keyCode: ' + e.keyCode)
     		if (e.keyCode == 32) {
-    			togglePause();
+    			if (speed == pauseSpeed) {
+    				setSpeed(100);
+    			} else {
+    				setSpeed(pauseSpeed);
+    			}
     		}
 
     		const newDirection = getDirectionFromKeyCode(e.keyCode);
