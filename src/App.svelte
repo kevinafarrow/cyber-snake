@@ -3,10 +3,20 @@
   import Food from "./Food.svelte";
   import Questionbox from "./Questionbox.svelte";
 
+
+  // Initialize some variables
   let question = "Which is better?";
   //let option1 = "here is a really long question. it goes on and on and really makes you consider.";
   let option1 = "bears";
   let option2 = "beets";
+  let correct = "bears";
+  let incorrect = "beets";
+  let collidedIncorrect = false;
+  let collidedCorrect = false;
+  let answerKey = [];
+  let foodEaten = "";
+  let correctFood = "food1";
+  let answerFoods = ["food1", "food2"]
 
   let food1Left = 0;
   let food1Top = 0;
@@ -17,21 +27,13 @@
   let speed = 100;
   let board = {'width': 1250, 'height': 550};
   let unit = 50;
+  let gameOver = false;
 
   let clear
-  //i got this from svelte REPL and don't know exactly how it works.
+  //i got this from svelte REPL and don't know exactly how it works, but it enables the pause button
   $: {
 	  clearInterval(clear)
 	  clear = setInterval(runGame, speed)
-  }
-
-  function togglePause() {
-    const pauseSpeed = 100000000;
-    if (speed < pauseSpeed) {
-      speed = pauseSpeed;
-    } else if (speed == pauseSpeed) {
-      speed = 100;
-    }
   }
 
   //draw the game repeatedly
@@ -55,20 +57,60 @@
     snakeBodies = [ newHead, ...snakeBodies];
 
     // if the snake eats food, create a new food and add a piece to the snake
+    if (isCollide(newHead, { left: food1Left, top: food1Top })) {
+      foodEaten = 'food1';
+    } else if (isCollide(newHead, {left: food2Left, top: food2Top})) {
+      foodEaten = 'food2';
+    }
     if ((isCollide(newHead, { left: food1Left, top: food1Top })) || (isCollide(newHead, { left: food2Left, top: food2Top }))) {
-      //poseQuestion();
-      moveFood();
-      snakeBodies = [...snakeBodies, snakeBodies[snakeBodies.length - 1]];
+      console.log('food eaten: ' + foodEaten);
+      console.log('correctFood: ' + correctFood);
+      if (foodEaten === correctFood) {
+        newQuestion();
+        moveFood();
+        snakeBodies = [...snakeBodies, snakeBodies[snakeBodies.length - 1]];
+      } else {
+        gameOver = true;
+      }
     }
 
-    if (isGameOver()) {
+    isGameOver()
+    if (gameOver) {
       alert("Game Over!");
       resetGame();
     }
   }
 
-  function poseQuestion() {
-    
+  function makePassword(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+
+  function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+    while (currentIndex != 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+    return array;
+  }
+
+  function newQuestion() {
+    question = "Which password is better?";
+    incorrect = makePassword(5);
+    correct = makePassword(7);
+    const answers = [ incorrect, correct ];
+    shuffle(answers);
+    option1 = answers[0];
+    option2 = answers[1];
+    correctFood = answerFoods[answers.indexOf(correct)];
   }
 
   function isCollide(a, b) {
@@ -88,14 +130,24 @@
   }
 
   function isGameOver() {
+    //console.log('calling is gameover: ' + gameOver)
     const snakeBodiesNoHead = snakeBodies.slice(1);
     const snakeCollisions = snakeBodiesNoHead.filter(sb => isCollide(sb, snakeBodies[0]));
     if (snakeCollisions.length !== 0) {
-      return true;
+      gameOver = true;
     }
     const { top, left } = snakeBodies[0];
     if (top >= board.height|| top < 0 || left >= board.width|| left < 0){
-      return true;
+      gameOver = true;
+    }
+  }
+
+  function togglePause() {
+    const pauseSpeed = 100000000;
+    if (speed < pauseSpeed) {
+      speed = pauseSpeed;
+    } else if (speed == pauseSpeed) {
+      speed = 100;
     }
   }
 
@@ -129,6 +181,8 @@
   }
 
   function resetGame() {
+    gameOver = false;
+    newQuestion();
     moveFood();
     direction = 'right';
     snakeBodies = [

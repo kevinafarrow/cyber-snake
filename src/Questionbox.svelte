@@ -4,6 +4,16 @@
 	export let option2;
 </script>
 
+<div class="questionbox">
+	<div class="question">{question}</div>
+  <div class="legend">
+    <div class="food1"/>
+	  <div class="option1">{option1}</div>
+    <div class="food2"/>
+	  <div class="option2">{option2}</div>
+  </div>
+</div>
+
 <style>
 	.questionbox {
 		width: 50%;
@@ -55,13 +65,3 @@
     position: relative center;
   }
 </style>
-
-<div class="questionbox">
-	<div class="question">{question}</div>
-  <div class="legend">
-    <div class="food1"/>
-	  <div class="option1">{option1}</div>
-    <div class="food2"/>
-	  <div class="option2">{option2}</div>
-  </div>
-</div>
