@@ -16,7 +16,8 @@
   let answerKey = [];
   let foodEaten = "";
   let correctFood = "food1";
-  let answerFoods = ["food1", "food2"]
+  let answerFoods = ["food1", "food2"];
+  let pauseSpeed = 100000000;
 
   let food1Left = 0;
   let food1Top = 0;
@@ -67,6 +68,8 @@
       console.log('correctFood: ' + correctFood);
       if (foodEaten === correctFood) {
         newQuestion();
+        setSpeed(3000);
+        delayedUnpause(3000);
         moveFood();
         snakeBodies = [...snakeBodies, snakeBodies[snakeBodies.length - 1]];
       } else {
@@ -81,6 +84,13 @@
     }
   }
 
+  const delay = ms => new Promise(res => setTimeout(res, ms));
+  const delayedUnpause = async (delayTime) => {
+    await delay(delayTime);
+    console.log("Waited " + delayTime);
+    setSpeed(100);
+  };
+  
   function makePassword(length) {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -142,13 +152,9 @@
     }
   }
 
-  function togglePause() {
-    const pauseSpeed = 100000000;
-    if (speed < pauseSpeed) {
-      speed = pauseSpeed;
-    } else if (speed == pauseSpeed) {
-      speed = 100;
-    }
+  function setSpeed(newSpeed) {
+    console.log('changing speed to ' + newSpeed);
+    speed = newSpeed;
   }
 
   function isOpposite(a, b) {
@@ -171,7 +177,11 @@
   function onKeyDown(e) {
     //console.log('keyCode: ' + e.keyCode)
     if (e.keyCode == 32) {
-      togglePause();
+      if (speed == pauseSpeed) {
+        setSpeed(100);
+      } else {
+        setSpeed(pauseSpeed);
+      }
     }
     const newDirection = getDirectionFromKeyCode(e.keyCode);
     //console.log(newDirection);
@@ -222,7 +232,7 @@
     position: relative;
     margin: 20px auto;
     background-size: contain;
-    background-color: #333333;
+    background-color: #444444;
   }
   h2, h1 {
     text-align: center;
