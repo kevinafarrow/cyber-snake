@@ -16,11 +16,11 @@
 
 <style>
 	.questionbox {
-		width: 50%;
+		width: 92%;
     height: 200px;
 		border: 1px solid #aaa;
 		border-radius: 2px;
-    position: relative center;
+    position: relative left;
     margin: auto;
 		box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
 		padding: 1em;

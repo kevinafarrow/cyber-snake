@@ -2,15 +2,620 @@
   import Snake from "./Snake.svelte";
   import Food from "./Food.svelte";
   import Questionbox from "./Questionbox.svelte";
+  import Answerbox from "./Answerbox.svelte";
 
+  let questions = [
+    {
+        'question': 'Which password is stronger?',
+        'correct': 'janice2020',
+        'incorrect': 'janice',
+        'explanation': 'Adding numbers makes the password stronger.'
+    },
+    {
+        'question': 'Which password is stronger?',
+        'correct': 'paulsimon',
+        'incorrect': 'janice',
+        'explanation': 'Longer passwords are better.'
+    },
+    {
+        'question': 'Which password is stronger?',
+        'correct': 'JaNice',
+        'incorrect': 'hubert',
+        'explanation': 'Adding capitals makes the password stronger.'
+    },
+    {
+        'question': 'Which password is stronger?',
+        'correct': 'herald$',
+        'incorrect': 'herald',
+        'explanation': 'Adding special characters makes the password stronger.'
+    },
+    {
+        'question': 'Which password is stronger?',
+        'correct': 'heRald',
+        'incorrect': 'Herald',
+        'explanation': 'Capitalizing the first character is more easily guessed by a hacker.'
+    },
+    {
+        'question': 'Which password is stronger',
+        'correct': 'basKetba1l',
+        'incorrect': 'tinKerbell',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    },
+    {
+        'question': 'Question',
+        'correct': 'correct',
+        'incorrect': 'incorrect',
+        'explanation': 'explanation'
+    }
+  ]
 
   // Initialize some variables
-  let question = "Which is better?";
-  //let option1 = "here is a really long question. it goes on and on and really makes you consider.";
-  let option1 = "bears";
-  let option2 = "beets";
-  let correct = "bears";
-  let incorrect = "beets";
+  let question = "";
+  let option1 = "";
+  let option2 = "";
+  let correct = "";
+  let incorrect = "";
+  let result = "";
+  let explanation = "";
+  console.log("explanation: " + explanation);
   let collidedIncorrect = false;
   let collidedCorrect = false;
   let answerKey = [];
@@ -18,6 +623,7 @@
   let correctFood = "food1";
   let answerFoods = ["food1", "food2"];
   let pauseSpeed = 100000000;
+  let questionNumber = 0;
 
   let food1Left = 0;
   let food1Top = 0;
@@ -29,6 +635,17 @@
   let board = {'width': 1250, 'height': 550};
   let unit = 50;
   let gameOver = false;
+
+  function initVariables () {
+    console.log('initializing variables');
+    gameOver = false;
+    questionNumber = 0;
+    result = "";
+    explanation = "";
+    newQuestion();
+  }
+
+  initVariables();
 
   let clear
   //i got this from svelte REPL and don't know exactly how it works, but it enables the pause button
@@ -66,14 +683,21 @@
     if ((isCollide(newHead, { left: food1Left, top: food1Top })) || (isCollide(newHead, { left: food2Left, top: food2Top }))) {
       console.log('food eaten: ' + foodEaten);
       console.log('correctFood: ' + correctFood);
+      explanation = questions[questionNumber - 1]['explanation'];
       if (foodEaten === correctFood) {
         newQuestion();
         setSpeed(3000);
         delayedUnpause(3000);
         moveFood();
         snakeBodies = [...snakeBodies, snakeBodies[snakeBodies.length - 1]];
+        result = "Correct!";
       } else {
+        result = "Incorrect.";
         gameOver = true;
+      }
+      if (questionNumber > 0) {
+        console.log('setting explanation: ' + explanation);
+        console.log('question number: ' + questionNumber);
       }
     }
 
@@ -91,16 +715,6 @@
     setSpeed(100);
   };
   
-  function makePassword(length) {
-    var result = '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  }
-
   function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
     while (currentIndex != 0) {
@@ -113,14 +727,23 @@
   }
 
   function newQuestion() {
-    question = "Which password is better?";
-    incorrect = makePassword(5);
-    correct = makePassword(7);
+    console.log('getting new question');
+    question = questions[questionNumber]['question'];
+    incorrect = questions[questionNumber]['incorrect'];
+    correct = questions[questionNumber]['correct']
     const answers = [ incorrect, correct ];
     shuffle(answers);
     option1 = answers[0];
     option2 = answers[1];
     correctFood = answerFoods[answers.indexOf(correct)];
+    questionNumber++;
+    console.log('after getting new question')
+    console.log('question number: ' + questionNumber);
+    console.log('option1: ' + option1);
+    console.log('option2: ' + option2);
+    console.log('correct: ' + correct);
+    console.log('incorrect: ' + incorrect);
+    console.log('correctFood: ' + correctFood);
   }
 
   function isCollide(a, b) {
@@ -137,6 +760,10 @@
     food1Left = Math.floor(Math.random() * Math.floor(board.width / unit)) * unit;
     food2Top = Math.floor(Math.random() * Math.floor(board.height / unit)) * unit;
     food2Left = Math.floor(Math.random() * Math.floor(board.width / unit)) * unit;
+    while ((food2Left === food1Left) & (food2Top === food1Top)) {
+      food2Top = Math.floor(Math.random() * Math.floor(board.height / unit)) * unit;
+      food2Left = Math.floor(Math.random() * Math.floor(board.width / unit)) * unit;
+    }
   }
 
   function isGameOver() {
@@ -191,8 +818,7 @@
   }
 
   function resetGame() {
-    gameOver = false;
-    newQuestion();
+    initVariables();
     moveFood();
     direction = 'right';
     snakeBodies = [
@@ -238,10 +864,21 @@
     text-align: center;
     font-family: 'Roboto Mono', monospace;
   }
+  .prompt {
+    width: 1250px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: .5em;
+    margin: auto;
+    position: relative center;
+  }
 </style>
 
 <h1>Cyber Snake</h1>
-<Questionbox {question} {option1} {option2}/>
+<div class="prompt">
+  <Questionbox {question} {option1} {option2}/>
+  <Answerbox {result} {explanation}/>
+</div>
 <main>
   <Snake {snakeBodies} {direction}/>
   <Food {food1Left} {food1Top} {food2Left} {food2Top} />
