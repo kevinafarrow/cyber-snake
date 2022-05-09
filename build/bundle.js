@@ -689,13 +689,13 @@ var app = (function () {
     			t5 = space();
     			div4 = element("div");
     			t6 = text(/*option2*/ ctx[2]);
-    			attr(div0, "class", "question svelte-1qjxlpj");
-    			attr(div1, "class", "food1 svelte-1qjxlpj");
-    			attr(div2, "class", "option1 svelte-1qjxlpj");
-    			attr(div3, "class", "food2 svelte-1qjxlpj");
-    			attr(div4, "class", "option2 svelte-1qjxlpj");
-    			attr(div5, "class", "legend svelte-1qjxlpj");
-    			attr(div6, "class", "questionbox svelte-1qjxlpj");
+    			attr(div0, "class", "question svelte-41isdr");
+    			attr(div1, "class", "food1 svelte-41isdr");
+    			attr(div2, "class", "option1 svelte-41isdr");
+    			attr(div3, "class", "food2 svelte-41isdr");
+    			attr(div4, "class", "option2 svelte-41isdr");
+    			attr(div5, "class", "legend svelte-41isdr");
+    			attr(div6, "class", "questionbox svelte-41isdr");
     		},
     		m(target, anchor) {
     			insert(target, div6, anchor);
@@ -1000,35 +1000,133 @@ var app = (function () {
     		},
     		{
     			"question": "Which password is stronger?",
-    			"correct": "mark20",
-    			"incorrect": "janice",
+    			"correct": "basketball15",
+    			"incorrect": "heartbreaker",
     			"explanation": "Adding numbers makes the password stronger."
     		},
     		{
     			"question": "Which password is stronger?",
-    			"correct": "JaNice",
-    			"incorrect": "hubert",
+    			"correct": "HotChocolate",
+    			"incorrect": "peanutbutter",
     			"explanation": "Adding capitals makes the password stronger."
     		},
     		{
     			"question": "Which password is stronger?",
-    			"correct": "herald$",
-    			"incorrect": "herald",
+    			"correct": "(tinkerbell)",
+    			"incorrect": "peaceandlove",
     			"explanation": "Adding special characters makes the password stronger."
     		},
     		{
+    			"question": "Which password is stronger",
+    			"correct": "Greenm0nster",
+    			"incorrect": "OrlandoBloom",
+    			"explanation": "'Greenm0nster' has an uppercase and a number, 'OrlandoBloom' has only lowercase and uppercase."
+    		},
+    		{
     			"question": "Which password is stronger?",
-    			"correct": "heRald",
-    			"incorrect": "Herald",
+    			"correct": "mydogisBecky",
+    			"incorrect": "Transformers",
     			"explanation": "Capitalizing the first character is more easily guessed by a hacker."
     		},
     		{
-    			"question": "Which password is stronger",
-    			"correct": "basKetba1l",
-    			"incorrect": "tinKerbell",
-    			"explanation": "explanation"
+    			"question": "Which password is stronger?",
+    			"correct": "neoalejapkeh",
+    			"incorrect": "892337850912",
+    			"explanation": "Letters are stronger than numbers as there are more letters to guess."
+    		},
+    		{
+    			"question": "Which password is stronger?",
+    			"correct": "boxrtlpanwbd",
+    			"incorrect": "supernatural",
+    			"explanation": "Random passwords are stronger than dictionary words."
+    		},
+    		{
+    			"question": "Which password is stronger?",
+    			"correct": "smartlyscored",
+    			"incorrect": "wewillrockyou",
+    			"explanation": "'We will rock you' is a recognizable phrase and easier to guess."
+    		},
+    		{
+    			"question": "Which password is stronger?",
+    			"correct": "bootleg918",
+    			"incorrect": "b00tlegger",
+    			"explanation": "Replacing letters with numbers that look similar is an easily guessed pattern."
+    		},
+    		{
+    			"question": "Which password is stronger?",
+    			"correct": "samantha0964",
+    			"incorrect": "carolina1234",
+    			"explanation": "Sequential numbers are easier to guess than random numbers."
+    		},
+    		{
+    			"question": "Which password is stronger?",
+    			"correct": "superman8290",
+    			"incorrect": "football2006",
+    			"explanation": "Common date formats are easier to guess than random numbers"
+    		},
+    		{
+    			"question": "True or false, it is best to use the same strong password accross all accounts.",
+    			"correct": "False",
+    			"incorrect": "True",
+    			"explanation": "If one account gets breached, all accounts with that password are compromised."
+    		},
+    		{
+    			"question": "Which is better?",
+    			"correct": "Using a password manager",
+    			"incorrect": "Remembering all your passwords in your head",
+    			"explanation": "Computers can guess everything you can remember. Best to let a computer generate good passwords you don't have to remember."
+    		},
+    		{
+    			"question": "True or false, having a strong password means no hacker could learn your password.",
+    			"correct": "False",
+    			"incorrect": "True",
+    			"explanation": "There are ways a hacker can retrieve even a strong password."
+    		},
+    		{
+    			"question": "True or false, it is more secure to use multi factor authentication.",
+    			"correct": "True",
+    			"incorrect": "False",
+    			"explanation": "Multi factor authentication adds another layer of security to your account."
+    		},
+    		{
+    			"question": "A number you don't recognize asks for your MFA token. Do you give it to them?",
+    			"correct": "No",
+    			"incorrect": "Yes",
+    			"explanation": "Never give a third party your MFA authentication token."
+    		},
+    		{
+    			"question": "A service you use notifies you your account has been breached. You should",
+    			"correct": "Change your password and enable multi factor authentication",
+    			"incorrect": "Delete your account",
+    			"explanation": "Resetting your password and enabling MFA is usually enough after a breach."
+    		},
+    		{
+    			"question": "Which is better?",
+    			"correct": "Using software services with good security reputations",
+    			"incorrect": "Using obscure software services that hackers don't know about",
+    			"explanation": "It is best to use software with a strong reputation. Obscure services might not have resources to invest in security"
+    		},
+    		{
+    			"question": "True or false, it is important to keep all your devices up to date with the latest software updates",
+    			"correct": "True",
+    			"incorrect": "False",
+    			"explanation": "Many updates involve security patches. Not updating is a security risk."
+    		},
+    		{
+    			"question": "True or false, iCloud, OneDrive, and Google Drive are good defenses against ransomware",
+    			"correct": "True",
+    			"incorrect": "False",
+    			"explanation": "Having a backup of your information online is a good practice to defend against ransomeware."
+    		},
+    		{
+    			"question": "True or false, it is more private to use a VPN.",
+    			"correct": "False",
+    			"incorrect": "True",
+    			"explanation": "Using a VPN just means you trust the VPN provider instead of your Internet Provider."
     		}
     	];
+
+    	console.log("you have " + questions.length + " questions.");
 
     	// Initialize some variables
     	let question = "";
@@ -1053,6 +1151,10 @@ var app = (function () {
     	let speed = 100;
     	let board = { "width": 1250, "height": 550 };
     	let gameOver = false;
+    	alert("Welcome to Cyber Snake!");
+    	alert("It's like classic snake, but with quesions! Read the question at the top and eat the food associated with the correct answer!");
+    	alert("You'll have 3 seconds to read the question before you are back in the game.");
+    	alert("Press OK to start! Good luck!");
 
     	function initVariables() {
     		console.log("initializing variables");
@@ -1128,7 +1230,7 @@ var app = (function () {
     		isGameOver();
 
     		if (gameOver) {
-    			alert("Game Over!");
+    			alert("Game Over!\n" + explanation);
     			resetGame();
     		}
     	}
