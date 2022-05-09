@@ -17,7 +17,7 @@
 <style>
 	.questionbox {
 		width: 92%;
-    height: 200px;
+    height: 250px;
 		border: 1px solid #aaa;
 		border-radius: 2px;
     position: relative left;
@@ -28,7 +28,7 @@
 		font-family: 'Roboto Mono', monospace;
 	}
 	.question {
-		font-size: 2em;
+		font-size: 1.5em;
     text-align: center;
 	}
   .option1, .option2 {
